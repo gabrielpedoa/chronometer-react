@@ -12,6 +12,7 @@ function App() {
   const [seconds, setSeconds] = useState(0);
 
   useEffect(() => {
+    //executado quando montado o componente ou quando alguma dependencia mudar (pause, seconds)
     if (!pause) {
       setTimeout(() => {
         nextSeconds();
@@ -22,11 +23,13 @@ function App() {
   function nextSeconds() {
     console.log(seconds);
     if (seconds + 1 >= 60) {
-      console.log("aaaaaaaaaaaaaaaaa");
       setMinutes((c) => c + 1);
       setSeconds(0);
     } else {
       setSeconds((c) => c + 1);
+    }
+    if(minutes == 30) {
+      setPause(true)
     }
   }
 
@@ -52,7 +55,7 @@ function App() {
           minutes={convertToTime(minutes)}
         />
         <ButtonClock>
-          <Button name={pause ? "resume" :"stop"} action={handlePause} />
+          <Button name={pause ? "resume" : "stop"} action={handlePause} />
         </ButtonClock>
       </ClockContainer>
     </DivPai>
