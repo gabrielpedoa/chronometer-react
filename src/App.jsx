@@ -1,56 +1,58 @@
-import styled from "styled-components";
+import { useEffect, useState } from "react";
 import { Button } from "./components/Button";
 import { Visor } from "./components/Visor";
+import { ButtonClock } from "./styles/ButtonClock";
+import { ClockContainer } from "./styles/ClockContainer";
+import { DivPai } from "./styles/DivPai";
 import { Global } from "./styles/Global";
 
-const DivPai = styled.div`
-  background-color: #f0d85f;
-  width: 100%;
-  height: 100vh;  
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`;
-
-const ClockContainer = styled.div`
-  background-color: #f9f49c;
-  width: 30%;
-  height: 55vh;
-  border-radius: 30%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  box-shadow: 10px 5px 5px 10px #100c085e;
-
-  #visor {
-    background-color: #fff;
-    border-radius: 10px;
-    width: 90%;
-    height: 10vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-`;
-
-const ButtonClock = styled.div`
-  display: flex;
-  gap: .8em;
-  padding: 1.8em;
-
-`
-
 function App() {
+  const [pause, setPause] = useState(false);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+
+  useEffect(() => {
+    if (!pause) {
+      setTimeout(() => {
+        nextSeconds();
+      }, 1000);
+    }
+  }, [pause, seconds]);
+
+  function nextSeconds() {
+    console.log(seconds);
+    if (seconds + 1 >= 60) {
+      console.log("aaaaaaaaaaaaaaaaa");
+      setMinutes((c) => c + 1);
+      setSeconds(0);
+    } else {
+      setSeconds((c) => c + 1);
+    }
+  }
+
+  function convertToTime(value) {
+    let time = String(value);
+    if (time.length === 1) {
+      return `0${time}`;
+    }
+    return value;
+  }
+
+  function handlePause() {
+    console.log("pause");
+    setPause((c) => !c);
+  }
+
   return (
     <DivPai>
       <Global />
       <ClockContainer>
-        <Visor value={"olá"} />
+        <Visor
+          secods={convertToTime(seconds)}
+          minutes={convertToTime(minutes)}
+        />
         <ButtonClock>
-          <Button name={'stop'} />
-          <Button name={'resume'} />
+          <Button name={pause ? "resume" :"stop"} action={handlePause} />
         </ButtonClock>
       </ClockContainer>
     </DivPai>
