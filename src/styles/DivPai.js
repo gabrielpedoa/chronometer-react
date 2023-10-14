@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const DivPai = styled.div`
-  background-color: #f0d85f;
+  background-color: #926644;
   width: 100%;
   height: 100vh;  
   display: flex;

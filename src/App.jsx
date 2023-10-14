@@ -45,6 +45,10 @@ function App() {
     console.log("pause");
     setPause((c) => !c);
   }
+  function handleClear() {
+    setMinutes(0)
+    setSeconds(0)
+  }
 
   return (
     <DivPai>
@@ -56,6 +60,7 @@ function App() {
         />
         <ButtonClock>
           <Button name={pause ? "resume" : "stop"} action={handlePause} />
+          <Button name={"clear"} action={handleClear} />
         </ButtonClock>
       </ClockContainer>
     </DivPai>

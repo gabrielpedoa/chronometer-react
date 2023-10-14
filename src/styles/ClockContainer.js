@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ClockContainer = styled.div`
-  background-color: #f9f49c;
+  background-color: #C2B280;
   width: 30%;
   height: 55vh;
   border-radius: 30%;
@@ -20,5 +20,6 @@ export const ClockContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 1.7em;
   }
 `;
